@@ -1,0 +1,64 @@
+CREATE TABLE matrix_a ( 
+r INT, 
+c INT, 
+val INT 
+) 
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY ',';
+
+
+CREATE TABLE matrix_b ( 
+r INT, 
+c INT, 
+val INT 
+) 
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY ','; 
+
+
+CREATE TABLE matrix_c ( 
+r INT, 
+c INT, 
+val INT    
+) 
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY ','; 
+
+
+SHOW TABLES; 
+
+
+INSERT INTO matrix_a VALUES 
+(0,0,1),                        
+(0,1,2), 
+(0,2,3), 
+(1,0,4), 
+(1,1,5), 
+(1,2,6);
+
+
+INSERT INTO matrix_b VALUES 
+(0,0,7), 
+(0,1,8), 
+(1,0,9), 
+(1,1,10), 
+(2,0,11), 
+(2,1,12);
+
+
+SELECT * FROM matrix_a; 
+SELECT * FROM matrix_b; 
+
+
+INSERT OVERWRITE TABLE matrix_c 
+         SELECT 
+             a.r, 
+             b.c, 
+         SUM(a.val * b.val) AS val 
+         FROM matrix_a a 
+         JOIN matrix_b b 
+         ON a.c = b.r 
+         GROUP BY a.r, b.c;
+
+
+SELECT * FROM matrix_c; 
