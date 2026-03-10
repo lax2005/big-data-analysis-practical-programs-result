@@ -1,0 +1,40 @@
+Select the csv file type & set the file delimiter type to the 9 (i.e horizontal tab)
+Choose the file from your local system (i.e u.data file)
+Rename the table name - ratings
+
+"
+column name -
+user_id
+movie_id
+rating
+rating_time
+"
+
+Hit the upload button
+
+Same for the movie name table
+Select the file type as above and set the file delimiter to 124
+Rename the table name to movie_name
+
+"
+column name -
+movie_id
+name
+"
+
+After this hit the upload button
+
+Write the SQL Query to perform operations
+
+SQL Query 1 -
+
+SELECT movie_id, count(movie_id) AS ratingcount
+FROM ratings
+GROUP BY movie_id
+ORDER BY ratingcount DESC;
+
+SQL Query 2 -
+
+SELECT name
+FROM movie_name
+WHERE movie_id = 50;
